@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var employees = $("#employeesList");
+
+            $("#btn").click(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "api/employees",
+                    dataType: "json",
+                    success: function () {
+                        employees.empty();
+
+                    },
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="button" id="btn" value="Get All employees" />
+    <input type="button" id="btnClear" value="Clear" />
+    <ul id="employeesList"></ul>
+</body>
+</html>
