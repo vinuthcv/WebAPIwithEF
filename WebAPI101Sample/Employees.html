@@ -3,21 +3,30 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    <script src="Scripts/jquery-3.3.1.js"></script>
+    <script src="Scripts/jquery-3.4.1.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            var employees = $("#employeesList");
+            var ulEmployees = $('#ulEmployees');
 
-            $("#btn").click(function () {
+            $('#btn').click(function () {
                 $.ajax({
-                    type: "GET",
-                    url: "api/employees",
-                    dataType: "json",
-                    success: function () {
-                        employees.empty();
+                    type: 'GET',
+                    url: 'api/employees',
+                    dataType: 'json',
+                    success: function (data) {
+                        ulEmployees.empty();
+
+                        $.each(data, function (index, val) {
+                            var fullName = val.FirstName + '' + val.LastName;
+                            ulEmployees.append('<li>' + fullName + '</li>')
+                        });
 
                     },
                 });
+            });
+
+            $('#btnClear').click(function () {
+                ulEmployees.empty();
             });
         });
     </script>
@@ -25,6 +34,6 @@
 <body>
     <input type="button" id="btn" value="Get All employees" />
     <input type="button" id="btnClear" value="Clear" />
-    <ul id="employeesList"></ul>
+    <ul id="ulEmployees"></ul>
 </body>
 </html>
