@@ -29,6 +29,8 @@ namespace WebAPI101Sample
 
             //config.Filters.Add(new RequireHttpsAttribute());
 
+            //config.Filters.Add(new BasicAuthenticationAttribute());
+
             //config.Formatters.JsonFormatter.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
             //config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             //config.Formatters.Remove(config.Formatters.JsonFormatter);

@@ -3,29 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Web.Http;
 using DataAccess;
 
 namespace WebAPI101Sample.Controllers
 {
-    [RequireHttps]
+    //[RequireHttps]
     public class EmployeesController : ApiController
     {
         [HttpGet]
+        [BasicAuthentication]
         public HttpResponseMessage LoadEmployees(string gender = "All")
         {
+            string userName = Thread.CurrentPrincipal.Identity.Name;
+
             using (EmployeeDBEntities entities = new EmployeeDBEntities())
             {
-                switch(gender.ToLower())
+                switch(userName.ToLower())
                 {
-                    case "all":
-                        return Request.CreateResponse(HttpStatusCode.OK, entities.Employees.ToList());
+                    //case "all":
+                    //    return Request.CreateResponse(HttpStatusCode.OK, entities.Employees.ToList());
                     case "male":
                         return Request.CreateResponse(HttpStatusCode.OK, entities.Employees.Where(e=>e.Gender.ToLower() == "male").ToList());
                     case "female":
                         return Request.CreateResponse(HttpStatusCode.OK, entities.Employees.Where(e => e.Gender.ToLower() == "female").ToList());
                     default:
-                        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Gender must be male, female or all. Value for gender "+gender+" is not valid");
+                        return Request.CreateResponse(HttpStatusCode.BadRequest);
                 }
             }
         }
