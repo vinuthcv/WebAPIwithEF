@@ -8,6 +8,7 @@ using DataAccess;
 
 namespace WebAPI101Sample.Controllers
 {
+    [RequireHttps]
     public class EmployeesController : ApiController
     {
         [HttpGet]

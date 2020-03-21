@@ -26,6 +26,9 @@ namespace WebAPI101Sample
 
             EnableCorsAttribute cors = new EnableCorsAttribute("http://localhost:53269", "*", "*");
             config.EnableCors(cors);
+
+            //config.Filters.Add(new RequireHttpsAttribute());
+
             //config.Formatters.JsonFormatter.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
             //config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             //config.Formatters.Remove(config.Formatters.JsonFormatter);
